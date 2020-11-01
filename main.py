@@ -2,14 +2,7 @@ from igramscraper.instagram import Instagram
 from time import sleep
 import csv
 
-
-
 instagram = Instagram()
-
-# authentication supported
-instagram.with_credentials('apitest1029384756', 'Aa1029384756')
-instagram.login()
-
 
 def seguidores(user):
     try:
@@ -38,8 +31,18 @@ def seguidos(user):
                 f.write(f'{following_user.username}\n')
     except:
         pass
+def run():
+    username = input('User to scrape? : ')
+    seguidores(username)
+    seguidos(username)
 
-
-username = input('Username: ')
-seguidores(username)
-seguidos(username)
+if __name__ == '__main__':
+    print('LOGIN: \n-----\n')
+    user = input('Username: ')
+    passwrd = input('Password: ')
+    instagram.with_credentials(user, passwrd)
+    try:
+        instagram.login()
+        run()
+    except:
+        print('LOGIN ERROR, AUTHORIZE THE DEVICE')
